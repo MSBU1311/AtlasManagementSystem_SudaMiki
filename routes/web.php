@@ -36,9 +36,9 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('delete/calendar', [CalendarController::class, 'delete'])->name('deleteParts');
             });
             Route::namespace('Admin')->group(function(){
-                Route::get('calendar/{user_id}/admin', [CalendarsController::class, 'show'])->name('calendar.admin.show');
+                Route::get('calendar/{user_id}/admin', [CalendarsController::class, 'show'])->name('calendar.admin.show')->middleware('role:1,2,3');
                 Route::get('calendar/{date}/{part}', [CalendarsController::class, 'reserveDetail'])->name('calendar.admin.detail');
-                Route::get('setting/{user_id}/admin', [CalendarsController::class, 'reserveSettings'])->name('calendar.admin.setting');
+                Route::get('setting/{user_id}/admin', [CalendarsController::class, 'reserveSettings'])->name('calendar.admin.setting')->middleware('role:1,2,3');
                 Route::post('setting/update/admin', [CalendarsController::class, 'updateSettings'])->name('calendar.admin.update');
             });
         });
