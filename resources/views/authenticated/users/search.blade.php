@@ -2,7 +2,7 @@
 <p>ユーザー検索</p>
 <div class="search_content w-100 border d-flex">
   <div class="reserve_users_area">
-    @foreach($users as $user)
+    @foreach($users as $user )
     <div class="border one_person">
       <div>
         <span>ID : </span><span>{{ $user->id }}</span>
@@ -43,7 +43,12 @@
       </div>
       <div>
         @if($user->role == 4)
-        <span>選択科目 :</span>
+          <span>選択科目 :
+            <!-- userコントローラーの中の、subjectメソッドのリレーションを呼び出して、その値を$subjectに代入する -->
+            @foreach($user->subjects as $subject)
+            {{ $subject->subject}}
+            @endforeach
+          </span>
         @endif
       </div>
     </div>
