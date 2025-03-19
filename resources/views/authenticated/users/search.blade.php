@@ -96,7 +96,7 @@
             <label>選択科目</label><br>
             <span>国語</span><input type="checkbox" name="subject" value="1" form="userSearchRequest"><br>
             <span>数学</span><input type="checkbox" name="subject" value="2" form="userSearchRequest"><br>
-            <span>英語</span><input type="checkbox" name="subject" value="3" form="userSearchRequest"><br>
+            <span>英語</span><input type="checkbox" name="subject" value="3" form="userSearchRequest">
           </div>
         </div>
       </div>
