@@ -12,11 +12,13 @@ class SelectNameDetails implements DisplayUsers{
     }else{
       $gender = array($gender);
     }
+
     if(is_null($role)){
       $role = ['1', '2', '3', '4'];
     }else{
       $role = array($role);
     }
+
     $users = User::with('subjects')
     ->where(function($q) use ($keyword){
       $q->Where('over_name', 'like', '%'.$keyword.'%')
@@ -28,8 +30,11 @@ class SelectNameDetails implements DisplayUsers{
       $q->whereIn('sex', $gender)
       ->whereIn('role', $role);
     })
+    // Userモデルのsubjectsリレーションから、入力されたsubjectを用いて検索する
     ->whereHas('subjects', function($q) use ($subjects){
-      $q->where('subjects.id', $subjects);
+      // subjectsテーブルのidに$subjectを含んでいる
+      $q->whereIn('subjects.id', $subjects);
+      // var_dump($subjects);
     })
     ->orderBy('over_name_kana', $updown)->get();
     return $users;
