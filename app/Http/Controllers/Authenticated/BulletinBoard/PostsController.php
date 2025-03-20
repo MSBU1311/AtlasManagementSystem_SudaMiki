@@ -44,7 +44,8 @@ class PostsController extends Controller
     }
 
     public function postInput(){
-        $main_categories = MainCategory::get();
+        // 全てのmain_categoryテーブルの情報を、subCategoriesのリレーション情報と一緒に取得する
+        $main_categories = MainCategory::with('subCategories')->get();
         return view('authenticated.bulletinboard.post_create', compact('main_categories'));
     }
 
@@ -71,6 +72,20 @@ class PostsController extends Controller
     }
     public function mainCategoryCreate(Request $request){
         MainCategory::create(['main_category' => $request->main_category_name]);
+        return redirect()->route('post.input');
+    }
+
+    public function subCategoryCreate(Request $request){
+        $request->validate([
+            'main_category_select' => ['required', 'exists:main_categories,id'],
+            'sub_category_name' => ['required', 'string', 'max:100', 'unique:sub_categories,sub_category']
+        ]);
+
+        $main_category_id = $request->main_category_select;
+        $sub_category = $request->sub_category_name;
+
+        SubCategory::create(['main_category_id' => $main_category_id,
+                            'sub_category' => $sub_category]);
         return redirect()->route('post.input');
     }
 

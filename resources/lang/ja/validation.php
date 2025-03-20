@@ -263,6 +263,8 @@ return [
         'old_day' => '誕生日',
         'role' => '役職',
         'password' => 'パスワード',
+        'main_category_select' => 'メインカテゴリーの選択',
+        'sub_category_name' => 'サブカテゴリー'
     ],
 
 ];
