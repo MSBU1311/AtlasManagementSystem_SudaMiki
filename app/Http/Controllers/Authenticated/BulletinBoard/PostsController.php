@@ -12,6 +12,7 @@ use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Auth;
+use DB;
 
 class PostsController extends Controller
 {
@@ -55,6 +56,15 @@ class PostsController extends Controller
             'post_title' => $request->post_title,
             'post' => $request->post_body
         ]);
+
+        $post_category_id = $request->post_category_id;
+
+        // データベースを直接指定して、中間テーブルに入力している
+        DB::table('post_sub_categories')->insert([
+        'post_id' => $post->id,
+        'sub_category_id' => $post_category_id,
+        ]);
+
         return redirect()->route('post.show');
     }
 
