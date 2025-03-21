@@ -72,6 +72,7 @@ class User extends Authenticatable
 
     // いいねしているかどうか
     public function is_Like($post_id){
+        // like_user_idとログインユーザーidが一致して、->like_post_idとpost_idが一致するカラムを取得
         return Like::where('like_user_id', Auth::id())->where('like_post_id', $post_id)->first(['likes.id']);
     }
 
