@@ -264,7 +264,9 @@ return [
         'role' => '役職',
         'password' => 'パスワード',
         'main_category_select' => 'メインカテゴリーの選択',
-        'sub_category_name' => 'サブカテゴリー'
+        'sub_category_name' => 'サブカテゴリー',
+        'post_title' => 'タイトル',
+        'post_body' => '本文',
     ],
 
 ];
