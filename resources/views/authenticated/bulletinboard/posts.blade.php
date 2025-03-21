@@ -9,7 +9,7 @@
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
           <div class="mr-5">
-            <i class="fa fa-comment"></i><span class=""></span>
+            <i class="fa fa-comment"></i><span class="">{{ $post_comment->commentCounts($post->id)->count() }}</span>
           </div>
           <div>
             <!-- ユーザーidとlike_user_idが一致していたら -->
