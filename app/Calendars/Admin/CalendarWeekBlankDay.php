@@ -1,6 +1,8 @@
 <?php
 namespace App\Calendars\Admin;
 
+// 前の月、次の月の余白を出力するための部分
+
 class CalendarWeekBlankDay extends CalendarWeekDay{
 
   function getClassName(){

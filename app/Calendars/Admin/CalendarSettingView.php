@@ -3,6 +3,8 @@ namespace App\Calendars\Admin;
 use Carbon\Carbon;
 use App\Models\Calendars\ReserveSettings;
 
+// カレンダーの設定を出力する部分
+
 class CalendarSettingView{
   private $carbon;
 

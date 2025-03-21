@@ -3,6 +3,8 @@ namespace App\Calendars\Admin;
 
 use Carbon\Carbon;
 
+// カレンダーの週を出力する部分
+
 class CalendarWeek{
   protected $carbon;
   protected $index = 0;
@@ -20,8 +22,10 @@ class CalendarWeek{
     $days = [];
     $startDay = $this->carbon->copy()->startOfWeek();
     $lastDay = $this->carbon->copy()->endOfWeek();
+    // 作業用
     $tmpDay = $startDay->copy();
 
+    // 月曜日〜日曜日までループ
     while($tmpDay->lte($lastDay)){
       if($tmpDay->month != $this->carbon->month){
         $day = new CalendarWeekBlankDay($tmpDay->copy());

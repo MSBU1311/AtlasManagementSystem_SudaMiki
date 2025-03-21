@@ -4,6 +4,8 @@ namespace App\Calendars\Admin;
 use Carbon\Carbon;
 use App\Models\Calendars\ReserveSettings;
 
+// カレンダーの日を出力する部分
+
 class CalendarWeekDay{
   protected $carbon;
 
@@ -11,11 +13,15 @@ class CalendarWeekDay{
     $this->carbon = new Carbon($date);
   }
 
+  // cssを当てることができるようにクラス名を出力
+  // format("D")が、Sun、Monなどの曜日を省略形式で取得できる
   function getClassName(){
     return "day-" . strtolower($this->carbon->format("D"));
   }
 
+  // カレンダーの日の内部を出力
   function render(){
+    // format("j")が、先頭に０をつけない日付を取得
     return '<p class="day">' . $this->carbon->format("j") . '日</p>';
   }
 
@@ -31,13 +37,22 @@ class CalendarWeekDay{
 
     $html[] = '<div class="text-left">';
     if($one_part){
-      $html[] = '<p class="day_part m-0 pt-1">1部</p>';
+      $date = $this->carbon->format("Y-m-d");
+      $part = 1;
+      $url = route('calendar.admin.detail', ['date' => $date, 'part' => $part]);
+      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">1部</a></p>';
     }
     if($two_part){
-      $html[] = '<p class="day_part m-0 pt-1">2部</p>';
+      $date = $this->carbon->format("Y-m-d");
+      $part = 2;
+      $url = route('calendar.admin.detail', ['date' => $date, 'part' => $part]);
+      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">2部</a></p>';
     }
     if($three_part){
-      $html[] = '<p class="day_part m-0 pt-1">3部</p>';
+      $date = $this->carbon->format("Y-m-d");
+      $part = 3;
+      $url = route('calendar.admin.detail', ['date' => $date, 'part' => $part]);
+      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">3部</a></p>';
     }
     $html[] = '</div>';
 
