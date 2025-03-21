@@ -18,16 +18,26 @@ class PostsController extends Controller
 {
     public function show(Request $request){
         $posts = Post::with('user', 'postComments')->get();
-        $categories = MainCategory::get();
+        $categories = MainCategory::with('subCategories')->get();
         $like = new Like;
         $post_comment = new Post;
         if(!empty($request->keyword)){
-            $posts = Post::with('user', 'postComments')
+            $posts = Post::with('user', 'postComments','subCategories')
             ->where('post_title', 'like', '%'.$request->keyword.'%')
-            ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
+            ->orWhere('post', 'like', '%'.$request->keyword.'%')
+            // WhereHas：リレーションシップに関連するレコードを検索
+            // $queryで送られてきたキーワードを元に抽出する
+            ->orWhereHas('subCategories', function ($query) use ($request){
+                $query->where('sub_category', '=' , $request->keyword);
+            })
+            ->get();
         }else if($request->category_word){
             $sub_category = $request->category_word;
-            $posts = Post::with('user', 'postComments')->get();
+            $posts = Post::with('user', 'postComments','subCategories')
+            ->WhereHas('subCategories', function ($query) use ($sub_category){
+                $query->where('sub_category',$sub_category);
+            })
+            ->get();
         }else if($request->like_posts){
             $likes = Auth::user()->likePostId()->get('like_post_id');
             $posts = Post::with('user', 'postComments')

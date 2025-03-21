@@ -3,6 +3,7 @@
 namespace App\Models\Categories;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Posts\Post;
 
 class SubCategory extends Model
 {
@@ -17,6 +18,6 @@ class SubCategory extends Model
     }
 
     public function posts(){
-        return $this->belongsToMany('App\Models\Posts\Post');
+        return $this->belongsToMany(Post::class, 'post_sub_categories');
     }
 }
