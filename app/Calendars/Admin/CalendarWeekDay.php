@@ -29,6 +29,7 @@ class CalendarWeekDay{
     return $this->carbon->format("Y-m-d");
   }
 
+  // スクール予約確認
   function dayPartCounts($ymd){
     $html = [];
     $one_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first();
