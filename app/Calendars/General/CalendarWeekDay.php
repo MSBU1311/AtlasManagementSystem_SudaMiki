@@ -78,10 +78,12 @@ class CalendarWeekDay{
      return $this->carbon->format('Y-m-d');
    }
 
+  //  setting_reserveのあたいのみを抽出して配列に変換
    function authReserveDay(){
      return Auth::user()->reserveSettings->pluck('setting_reserve')->toArray();
    }
 
+  //  setting_reserve 列の値が $reserveDate と一致する要素のみ抽出する
    function authReserveDate($reserveDate){
      return Auth::user()->reserveSettings->where('setting_reserve', $reserveDate);
    }

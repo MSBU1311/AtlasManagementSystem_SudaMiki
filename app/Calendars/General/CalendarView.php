@@ -40,13 +40,33 @@ class CalendarView{
         $startDay = $this->carbon->copy()->format("Y-m-01");
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
+        // 今日以前〜今日までの場合
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+          // グレーアウトする
           $html[] = '<td class="calendar-td">';
         }else{
           $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }
+        // カレンダーの日付を取得
         $html[] = $day->render();
 
+        // 今日以前〜今日までの場合
+        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+          if(in_array($day->everyDay(), $day->authReserveDay())){
+            $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+            if($reservePart == 1){
+              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">1部参加</p>';
+            }else if($reservePart == 2){
+              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">2部参加</p>';
+            }else if($reservePart == 3){
+              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">3部参加</p>';
+            }
+          }else{
+          // 受付終了を表示
+          $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+          }
+        // それ以外の場合
+        }else{
         if(in_array($day->everyDay(), $day->authReserveDay())){
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
           if($reservePart == 1){
@@ -69,6 +89,7 @@ class CalendarView{
         $html[] = $day->getDate();
         $html[] = '</td>';
       }
+    }
       $html[] = '</tr>';
     }
     $html[] = '</tbody>';
