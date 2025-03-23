@@ -41,19 +41,25 @@ class CalendarWeekDay{
       $date = $this->carbon->format("Y-m-d");
       $part = 1;
       $url = route('calendar.admin.detail', ['date' => $date, 'part' => $part]);
-      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">1部</a></p>';
+      $reservePersons = ReserveSettings::with('users')->where('setting_reserve', $date)->where('setting_part', $part)->get();
+      foreach ($reservePersons as $reservePerson) {
+      $userCount = $reservePerson->users()->get()->count();
+      $text = '<span style="margin-left: 10px;"> . $userCount . </span>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">1部</a>' . $text . '</p>';}
     }
     if($two_part){
       $date = $this->carbon->format("Y-m-d");
       $part = 2;
       $url = route('calendar.admin.detail', ['date' => $date, 'part' => $part]);
-      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">2部</a></p>';
+      $text ='<span style="margin-left: 10px;">A</span>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">2部</a>' . $text . '</p>';
     }
     if($three_part){
       $date = $this->carbon->format("Y-m-d");
       $part = 3;
       $url = route('calendar.admin.detail', ['date' => $date, 'part' => $part]);
-      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">3部</a></p>';
+      $text ='<span style="margin-left: 10px;">A</span>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">3部</a>' . $text . '</p>';
     }
     $html[] = '</div>';
 
