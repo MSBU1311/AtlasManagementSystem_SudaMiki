@@ -43,7 +43,7 @@ class CalendarView{
         // 今日以前〜今日までの場合
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           // グレーアウトする
-          $html[] = '<td class="calendar-td">';
+          $html[] = '<td class="past-day border calendar-td">';
         }else{
           $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }
