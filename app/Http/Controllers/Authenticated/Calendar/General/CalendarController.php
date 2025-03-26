@@ -35,4 +35,16 @@ class CalendarController extends Controller
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
+
+    public function delete(Request $request){
+// 受け取ったidをもとに削除処理を行う
+        $reserveId = $request->input('reserve_id');
+        $user=Auth::id();
+
+        DB::table('reserve_setting_users')
+        ->where('reserve_setting_id', $reserveId)
+        ->delete();
+
+        return redirect()->route('calendar.general.show', ['user_id' => $user]);
+    }
 }

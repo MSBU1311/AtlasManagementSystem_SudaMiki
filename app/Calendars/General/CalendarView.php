@@ -80,8 +80,26 @@ class CalendarView{
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
-            $html[] = '<button type="submit" class="delete-modal-open btn btn-danger p-0 w-75" name="delete_date" delete_date=" '. $day->everyDay() .'" reservePart="'. $reservePart .'" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+
+            $html[] = '<input
+            type="hidden"
+            name="getPart[]" value="' . $day->getReserveSettingId($day->everyDay()) .'"
+            form="reserveParts">';
+
+            // 対象の日付・部数・reserve_settingsのidをそれぞれ格納してJSに送る
+            $html[] = '<button
+            type="submit"
+            class="delete-modal-open btn btn-danger p-0 w-75"
+            name="delete_date"
+            style="font-size:12px"
+            data-date=" '. $day->everyDay() .'"
+            data-part="'. $reservePart .'"
+            data-reserve-id="' . $day->authReserveDate($day->everyDay())->first()->id . '">
+            '. $reservePart .'</button>';
+
+
+
+
           }
         }else{
           $html[] = $day->selectPart($day->everyDay());

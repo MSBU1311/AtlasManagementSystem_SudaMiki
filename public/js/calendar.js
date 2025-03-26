@@ -2,10 +2,14 @@ $(function () {
 
   $('.delete-modal-open').on('click', function () {
     $('.js-modal').fadeIn();
-    var delete_date = $(this).attr('delete_date');
-    var reservePart = $(this).attr('reservePart');
-    $('#modal-date').text(delete_date);
-    $('#modal-delete-part').text(reservePart);
+    // ClarendaeViewから取得する
+    var deleteDate = $(this).data('date');
+    var reservePart = $(this).data('part');
+    var reserveId = $(this).data('reserve-id');
+    // 受け取った値をcalendar.bladeの対象のクラスに設定する
+    $('#modal-delete-date').text(deleteDate);
+    $('#modal-reserve-part').text(reservePart);
+    $('#delete-form-reserve-id').val(reserveId);
     return false;
   });
   $('.js-modal-close').on('click', function () {
