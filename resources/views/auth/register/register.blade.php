@@ -4,15 +4,9 @@
       <div class="register_content w-25 vh-75 border p-3">
         <div class="register_form">
           <div class="d-flex mt-3" style="justify-content:space-between; flex-direction: column;">
-            @if ($errors->has('over_name') || $errors->has('under_name'))
-              <p class="error">
-                @if ($errors->has('over_name'))
-                    {{ $errors->first('over_name') }}<br>
-                @endif
-                @if ($errors->has('under_name'))
-                    {{ $errors->first('under_name') }}
-                @endif
-              </p>
+            @if($errors->first('over_name')|| $errors->has('under_name'))
+              <span class="error_message">{{ $errors->first('over_name') }}</span></br>
+              <span class="error_message">{{ $errors->first('under_name') }}</span>
             @endif
             <div class="name_box d-flex mt-3" style="justify-content:space-between;">
               <div class="" style="width:140px">
@@ -30,15 +24,9 @@
             </div>
           </div>
           <div class="d-flex mt-3" style="justify-content:space-between; flex-direction: column;">
-            @if ($errors->has('over_name_kana') || $errors->has('under_name_kana'))
-              <p class="error">
-                @if ($errors->has('over_name_kana'))
-                    {{ $errors->first('over_name_kana') }}<br>
-                @endif
-                @if ($errors->has('under_name_kana'))
-                    {{ $errors->first('under_name_kana') }}
-                @endif
-              </p>
+            @if($errors->first('over_name_kana')|| $errors->has('under_name_kana'))
+              <span class="error_message">{{ $errors->first('over_name_kana') }}</span></br>
+              <span class="error_message">{{ $errors->first('under_name_kana') }}</span>
             @endif
             <div class="name_kana_box d-flex mt-3" style="justify-content:space-between;">
               <div class="" style="width:140px">
@@ -56,13 +44,9 @@
             </div>
           </div>
           <div class="mt-3">
-            @if ($errors->has('mail_address') )
-              <p class="error">
-                @if ($errors->has('mail_address'))
-                    {{ $errors->first('mail_address') }}<br>
-                @endif
-              </p>
-            @endif
+              @if($errors->first('mail_address'))
+                <span class="error_message">{{ $errors->first('mail_address') }}</span>
+              @endif
             <label class="m-0 d-block" style="font-size:13px">メールアドレス</label>
             <div class="border-bottom border-primary">
               <input type="mail" class="w-100 border-0 mail_address" name="mail_address">
@@ -70,12 +54,8 @@
           </div>
         </div>
         <div class="radio_box mt-3">
-          @if ($errors->has('sex'))
-            <p class="error">
-              @if ($errors->has('sex'))
-                {{ $errors->first('sex') }}<br>
-              @endif
-            </p>
+          @if($errors->first('sex'))
+            <span class="error_message">{{ $errors->first('sex') }}</span>
           @endif
           <div class="radio">
             <input type="radio" name="sex" class="sex" value="1">
@@ -91,19 +71,11 @@
           </div>
         </div>
         <div class="birthday_box mt-3">
-          @if ($errors->has('old_year') || $errors->has('old_month')|| $errors->has('old_day'))
-            <p class="error">
-              @if ($errors->has('old_year'))
-                {{ $errors->first('old_year') }}<br>
-              @endif
-              @if ($errors->has('old_month'))
-                {{ $errors->first('old_month') }}
-              @endif
-              @if ($errors->has('old_day'))
-                {{ $errors->first('old_day') }}
-              @endif
-            </p>
-            @endif
+        @if($errors->first('old_year')|| $errors->has('old_month')|| $errors->has('old_day'))
+          <span class="error_message">{{ $errors->first('old_year') }}</span></br>
+          <span class="error_message">{{ $errors->first('old_month') }}</span>
+          <span class="error_message">{{ $errors->first('old_day') }}</span>
+        @endif
           <label class="d-block m-0 aa" style="font-size:13px;">生年月日</label>
           <div class="birth_day">
             <select class="old_year" name="old_year">
@@ -205,12 +177,8 @@
           </div>
         </div>
         <div class="role_box mt-3">
-          @if ($errors->has('role'))
-            <p class="error">
-              @if ($errors->has('role'))
-                {{ $errors->first('role') }}<br>
-              @endif
-            </p>
+          @if($errors->first('role'))
+            <span class="error_message">{{ $errors->first('role') }}</span>
           @endif
           <label class="d-block m-0" style="font-size:13px">役職</label>
           <div class="role_radio">
@@ -234,12 +202,8 @@
           @endforeach
         </div>
         <div class="password_box mt-3">
-          @if ($errors->has('password'))
-            <p class="error">
-              @if ($errors->has('password'))
-                {{ $errors->first('password') }}<br>
-              @endif
-            </p>
+          @if($errors->first('password'))
+            <span class="error_message">{{ $errors->first('password') }}</span>
           @endif
           <label class="d-block m-0" style="font-size:13px">パスワード</label>
           <div class="border-bottom border-primary">
@@ -247,12 +211,8 @@
           </div>
         </div>
         <div class="password_box mt-3">
-          @if ($errors->has('password'))
-            <p class="error">
-              @if ($errors->has('password'))
-                {{ $errors->first('password') }}<br>
-              @endif
-            </p>
+          @if($errors->first('password'))
+            <span class="error_message">{{ $errors->first('password') }}</span>
           @endif
           <label class="d-block m-0" style="font-size:13px">確認用パスワード</label>
           <div class="border-bottom border-primary">
