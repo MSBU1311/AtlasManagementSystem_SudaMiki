@@ -2,7 +2,11 @@ $(function () {
   $('.main_categories').click(function () {
     var category_id = $(this).attr('category_id');
     $('.category_num' + category_id).slideToggle();
+    $(this).find('.arrow').toggleClass('up');
   });
+
+  $('[class^="category_num"]').hide();
+
 
   $(document).on('click', '.like_btn', function (e) {
     e.preventDefault();

@@ -11,6 +11,11 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\BulletinBoard\PostRequest;
+use App\Http\Requests\BulletinBoard\PostMainCategoryRequest;
+use App\Http\Requests\BulletinBoard\PostSubCategoryRequest;
+use App\Http\Requests\BulletinBoard\PostCommentRequest;
+use App\Http\Requests\BulletinBoard\PostEditRequest;
 use Auth;
 use DB;
 
@@ -78,11 +83,7 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
 
-    public function postEdit(Request $request){
-        $request->validate([
-            'post_title' => ['required', 'string', 'max:100'],
-            'post_body' => ['required', 'string', 'max:2000']
-        ]);
+    public function postEdit(PostEditRequest $request){
 
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
@@ -96,18 +97,15 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
 
-    public function mainCategoryCreate(Request $request){
+    public function mainCategoryCreate(PostMainCategoryRequest $request){
+
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
     }
 
-    public function subCategoryCreate(Request $request){
-        $request->validate([
-            'main_category_select' => ['required', 'exists:main_categories,id'],
-            'sub_category_name' => ['required', 'string', 'max:100', 'unique:sub_categories,sub_category']
-        ]);
+    public function subCategoryCreate(PostSubCategoryRequest $request){
 
-        $main_category_id = $request->main_category_select;
+        $main_category_id = $request->main_category_id;
         $sub_category = $request->sub_category_name;
 
         SubCategory::create(['main_category_id' => $main_category_id,
@@ -115,10 +113,7 @@ class PostsController extends Controller
         return redirect()->route('post.input');
     }
 
-    public function commentCreate(Request $request){
-        $request->validate([
-            'comment' => ['required','string', 'max:250']
-        ]);
+    public function commentCreate(PostCommentRequest $request){
 
         PostComment::create([
             'post_id' => $request->post_id,

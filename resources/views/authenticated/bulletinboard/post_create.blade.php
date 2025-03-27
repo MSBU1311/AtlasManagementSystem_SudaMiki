@@ -38,16 +38,10 @@
   @can('admin')
   <div class="w-25 ml-auto mr-auto">
     <div class="category_area mt-5 p-5">
-      @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-              @foreach($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-        </div>
-      @endif
       <div class="main_category">
+        @if($errors->first('main_category_name'))
+          <span class="error_message">{{ $errors->first('main_category_name') }}</span>
+        @endif
         <p class="m-0">メインカテゴリー</p>
         <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest">
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
@@ -55,8 +49,12 @@
       <form action="{{ route('main.category.create') }}" method="post" id="mainCategoryRequest">{{ csrf_field() }}</form>
       <!-- サブカテゴリー追加 -->
       <div class="sub_category">
+        @if($errors->first('main_category_id')|| $errors->has('sub_category_name'))
+          <span class="error_message">{{ $errors->first('main_category_id') }}</span></br>
+          <span class="error_message">{{ $errors->first('sub_category_name') }}</span>
+        @endif
         <p class="m-0">サブカテゴリー</p>
-        <select name="main_category_select" form="subCategoryRequest" class="main_category_select">
+        <select name="main_category_id" form="subCategoryRequest" class="main_category_select">
           <option selected disabled>----</option>
           @foreach($main_categories as $main_category)
             <option value="{{$main_category -> id}}">{{$main_category -> main_category}}</option>

@@ -1,7 +1,9 @@
 <x-sidebar>
 <div class="vh-100 border">
-  <div class="top_area w-75 m-auto pt-5">
+  <div class="profile_name">
     <span>{{ $user->over_name }}</span><span>{{ $user->under_name }}さんのプロフィール</span>
+  </div>
+  <div class="top_area w-75 m-auto pt-5">
     <div class="user_status p-3">
       <p>名前 : <span>{{ $user->over_name }}</span><span class="ml-1">{{ $user->under_name }}</span></p>
       <p>カナ : <span>{{ $user->over_name_kana }}</span><span class="ml-1">{{ $user->under_name_kana }}</span></p>
@@ -14,17 +16,17 @@
       </div>
       <div class="">
         @can('admin')
-        <span class="subject_edit_btn">選択科目の編集</span>
+        <span class="subject_edit_btn">選択科目の登録<span class="arrow_subject"> &#8744;</span></span>
         <div class="subject_inner">
           <form action="{{ route('user.edit') }}" method="post">
-            @foreach($subject_lists as $subject_list)
             <div>
+              @foreach($subject_lists as $subject_list)
               <label>{{ $subject_list->subject }}</label>
               <input type="checkbox" name="subjects[]" value="{{ $subject_list->id }}">
+              @endforeach
+              <input type="submit" value="登録" class="btn btn-primary" style="height: 35px; font-size: 15px">
+              <input type="hidden" name="user_id" value="{{ $user->id }}">
             </div>
-            @endforeach
-            <input type="submit" value="編集" class="btn btn-primary">
-            <input type="hidden" name="user_id" value="{{ $user->id }}">
             {{ csrf_field() }}
           </form>
         </div>

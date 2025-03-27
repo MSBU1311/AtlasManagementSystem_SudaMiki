@@ -8,20 +8,89 @@
 
 /* body */
 .all_content {
-  background: #ECF1F6;
+  background: #EDF1F5;
 }
+
 
 ul,
 li {
   list-style: none;
 }
 
+/* ログイン、新規登録 */
+
+.error {
+  color: red;
+  font-size: 0.8em;
+  margin-bottom: 0;
+}
+
+.Atlas_logo {
+  width: 150px;
+}
+
+.login_content,
+.register_content {
+  background-color: #FFF;
+  box-shadow: 2px 2px 4px gray;
+  border-radius: 10px;
+}
+
+.register_form,
+.password_box {
+  padding: 20px;
+}
+
+.radio_box {
+  display: flex;
+  justify-content: space-around;
+  margin-right: 10px;
+  margin-left: 10px;
+  align-items: center;
+}
+
+.birthday_box,
+.role_box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 20px;
+  padding-top: 0;
+}
+
+
+.birth_day,
+.role_radio {
+  display: flex;
+  justify-content: space-around;
+  margin-right: 10px;
+  align-items: center;
+}
+
+.old_year,
+.old_month,
+.old_day {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #007bff;
+  width: 80px;
+}
+
+.select_teacher {
+  margin-left: 20px;
+}
+
+.text-center {
+  margin-bottom: 20px;
+}
+
 /* サイドバー */
 .sidebar {
-  width: 150px;
+  width: 180px;
   height: 100vh;
   background-color: #03AAD2;
   font-weight: bold;
+  padding-top: 10px;
 }
 
 .main-container {
@@ -33,9 +102,17 @@ li {
 }
 
 /* トップページ */
+.my_page {
+  position: absolute;
+  top: 10px;
+  left: 180px;
+}
+
 .user_status {
   border-radius: 10px;
   background: #FFF;
+  box-shadow: 2px 2px 6px lightgray;
+  margin-top: 50px;
 }
 
 /* スクール予約関連 */
@@ -80,6 +157,28 @@ li {
   width: 70%;
 }
 
+.reserve_detail {
+  height: auto;
+  background-color: #fff;
+  padding: 7px;
+  border-radius: 10px;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: #fff;
+}
+
+.table-striped>tbody>tr:nth-child(even)>td,
+.table-striped>tbody>tr:nth-child(even)>th {
+  background-color: #E8F5F9;
+}
+
+.table-striped>thead {
+  background-color: #4CA6CE;
+  color: #fff;
+}
+
 /* モーダル */
 .modal {
   display: none;
@@ -107,9 +206,118 @@ li {
 }
 
 /* 掲示板 */
-.sub_categories {
-  display: none;
+.new_create {
+  width: 100%;
+  margin: 20px;
+  margin-left: 0;
 }
+
+.key_word {
+  position: relative;
+}
+
+.kyeword_form {
+  display: inline-block;
+  margin-right: 0;
+  margin-bottom: 20px;
+  padding: 15px;
+  width: 200px;
+  height: 40px;
+  font-size: 100%;
+  box-sizing: border-box;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid #ccc;
+  border-right: none;
+}
+
+.keyword_button {
+  position: absolute;
+  left: 200px;
+  display: inline-block;
+  padding: 0 10px;
+  color: #fff;
+  width: 75px;
+  height: 40px;
+  font-size: 100%;
+  vertical-align: top;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background: #4CA7CE;
+}
+
+.post_search {
+  display: flex;
+  justify-content: space-between;
+}
+
+.like_post {
+  /* display: inline-block; */
+  padding: 0 10px;
+  color: #fff;
+  width: 49%;
+  height: 30px;
+  font-size: 80%;
+  vertical-align: top;
+  border: none;
+  border-radius: 5px;
+  background: #D792AA;
+}
+
+.my_post {
+  /* display: inline-block; */
+  padding: 0 10px;
+  color: #fff;
+  width: 49%;
+  height: 30px;
+  font-size: 80%;
+  vertical-align: top;
+  border: none;
+  border-radius: 5px;
+  background: #E4BE6C;
+}
+
+.main_categories {
+  position: relative;
+  display: inline-block;
+  width: 97%;
+  margin: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid lightgray;
+}
+
+.sub_categories {
+  display: inline-block;
+  width: 80%;
+  height: 40px;
+  margin-left: 20px;
+  border: none;
+  cursor: pointer;
+  border-bottom: 1px solid lightgray;
+  background-color: transparent;
+  text-align: left;
+}
+
+.arrow {
+  position: absolute;
+  right: 10px;
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.arrow.up {
+  transform: rotate(180deg);
+  /* 上向きに回転 */
+}
+
+.arrow_subject {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.arrow_subject.up {
+  transform: rotate(180deg);
+}
+
 
 .post_create_area {
   background: #FFF;
@@ -131,8 +339,24 @@ li {
   border-radius: 10px;
 }
 
+.post_title a {
+  color: black;
+  font-weight: bold;
+}
+
 .post_bottom_area {
   justify-content: space-between;
+}
+
+.post_sub_category {
+  color: #fff;
+  width: auto;
+  height: auto;
+  padding: 5px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  background: #4CA7CE;
 }
 
 .like_btn,
@@ -169,10 +393,6 @@ li {
 .detail_inner_head {
   display: flex;
   justify-content: space-between;
-}
-
-.edit-modal-open {
-  cursor: pointer;
 }
 
 .modal-inner-body textarea {
@@ -241,32 +461,93 @@ li {
 .reserve_users_area {
   display: flex;
   flex-wrap: wrap;
-  width: 800px;
+  width: 70%;
   margin: 10px auto;
   height: 80vh;
   overflow: scroll;
   padding: 10px;
-  background: #FFF;
-  border-radius: 5px;
+  border: none;
 }
 
 .reserve_users_area span {
   font-size: 12px;
 }
 
+.reserve_users_area div {
+  margin-top: auto;
+}
+
 .one_person {
-  width: 250px;
-  height: 250px;
+  display: flex;
+  flex-direction: column;
+  width: 230px;
+  height: 230px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 2px 2px 4px gray;
+  border-radius: 10px;
+  background: #FFF;
+}
+
+.search_area {
+  margin-top: 60px;
+}
+
+.search_box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.free_word {
+  height: 50px;
+  background-color: lightgray;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.category,
+.updown,
+.engineer {
+  height: 30px;
+  width: 80px;
+  background-color: lightgray;
+  border: none;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.search_container {
+  margin-top: 20px;
 }
 
 .search_conditions span {
   cursor: pointer;
 }
 
+.search_conditions {
+  position: relative;
+  display: inline-block;
+  width: 97%;
+  margin: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid lightgray;
+}
+
 .search_conditions_inner {
   display: none;
-  background: #FFF;
+  /* background: #FFF; */
 }
+
+.sex_box,
+.role_search,
+.selected_engineer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
 
 .subject_edit_btn {
   font-size: 12px;
@@ -275,5 +556,22 @@ li {
 }
 
 .subject_inner {
-  display: none;
+  display: flex;
+}
+
+.subject_inner input {
+  margin-right: 10px;
+}
+
+.search_reset {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  color: #4CA7CE;
+  margin-left: 41%;
+}
+
+.profile_name {
+  margin: 10px;
 }

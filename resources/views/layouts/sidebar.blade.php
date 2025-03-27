@@ -20,15 +20,36 @@
     <body class="all_content">
         <div class="d-flex">
             <div class="sidebar">
-                <p><a href="{{ route('top.show') }}">トップ</a></p>
-                <p><a href="/logout">ログアウト</a></p>
-                <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></p>
+                <p>
+                    <img src="/image/my-page.png" alt="マイページアイコン" style="width:20px; margin-left: 3px;">
+                    <a href="{{ route('top.show') }}">マイページ</a>
+                </p>
+                <p>
+                    <img src="/image/logout.png" alt="ログアウトアイコン" style="width:15px; margin-left: 5px;">
+                    <a href="/logout">ログアウト</a>
+                </p>
+                <p>
+                    <img src="/image/reserve.png" alt="スクール予約アイコン" style="width:15px; margin-left: 5px;">
+                    <a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a>
+                </p>
                 @if(in_array(Auth::user()->role,[1,2,3]))
-                    <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a></p>
-                    <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">スクール枠登録</a></p>
+                    <p>
+                        <img src="/image/reserve-confirmation.png" alt="スクール予約確認アイコン" style="width:15px; margin-left: 5px;">
+                        <a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a>
+                    </p>
+                    <p>
+                        <img src="/image/reserve-edit.png" alt="スクール予約枠登録アイコン" style="width:15px; margin-left: 5px;">
+                        <a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">スクール枠登録</a>
+                    </p>
                 @endif
-                <p><a href="{{ route('post.show') }}">掲示板</a></p>
-                <p><a href="{{ route('user.show') }}">ユーザー検索</a></p>
+                <p>
+                    <img src="/image/bulletinboard.png" alt="掲示板アイコン" style="width:15px; margin-left: 5px;">
+                    <a href="{{ route('post.show') }}">掲示板</a>
+                </p>
+                <p>
+                    <img src="/image/user.png" alt="ユーザー検索アイコン" style="width:15px; margin-left: 5px;">
+                    <a href="{{ route('user.show') }}">ユーザー検索</a>
+                </p>
             </div>
             <div class="main-container">
                 {{ $slot }}

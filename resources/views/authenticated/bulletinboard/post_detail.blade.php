@@ -2,24 +2,20 @@
 <div class="vh-100 d-flex">
   <div class="w-50 mt-5">
     <div class="m-3 detail_container">
+      @if($errors->first('post_title')|| $errors->has('post_body'))
+        <span class="error_message">{{ $errors->first('post_title') }}</span></br>
+        <span class="error_message">{{ $errors->first('post_body') }}</span>
+      @endif
       <div class="p-3">
         <div class="detail_inner_head">
-          <div>
-            @if($errors->any())
-              <div class="alert alert-danger">
-                  <ul>
-                    @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                  </ul>
-              </div>
-            @endif
-          </div>
           @if (Auth::user()->id == $post->user_id)
-          <div>
-            <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してもよろしいですか？')">削除</a>
-          </div>
+            @foreach($post->subCategories as $subCategory)
+              <span class="post_sub_category">{{ $subCategory->sub_category }}</span>
+            @endforeach
+            <div class="edit_delete">
+              <span class="edit-modal-open btn btn-primary" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
+              <a class="btn btn-danger" href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してもよろしいですか？')">削除</a>
+            </div>
           @endif
         </div>
 
@@ -53,6 +49,9 @@
   <div class="w-50 p-3">
     <div class="comment_container border m-5">
       <div class="comment_area p-3">
+        @if($errors->first('comment'))
+          <span class="error_message">{{ $errors->first('comment') }}</span>
+        @endif
         <p class="m-0">コメントする</p>
         <textarea class="w-100" name="comment" form="commentRequest"></textarea>
         <input type="hidden" name="post_id" form="commentRequest" value="{{ $post->id }}">
