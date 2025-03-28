@@ -43,9 +43,13 @@ class CalendarWeekDay{
       $url = route('calendar.admin.detail', ['date' => $date, 'part' => $part]);
       $reservePersons = ReserveSettings::with('users')->where('setting_reserve', $date)->where('setting_part', $part)->get();
       foreach ($reservePersons as $reservePerson) {
-      $userCount = $reservePerson->users()->get()->count();
-      $text = '<span style="margin-left: 10px;">' . $userCount . '</span>';
-      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">1部</a>' . $text . '</p>';}
+        $userCount = $reservePerson->users()->get()->count();
+        $text = '<span style="margin-left: 10px;">' . $userCount . '</span>';
+        $date = Carbon::parse('' . $date . '');
+        $weekDay = $date->format('D');
+        $weekDayClass = 'day-' . strtolower($weekDay);
+        $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '" class="' . $weekDayClass . '">1部</a>' . $text . '</p>';
+      }
     }
     if($two_part){
       $date = $this->carbon->format("Y-m-d");
@@ -55,7 +59,10 @@ class CalendarWeekDay{
       foreach ($reservePersons as $reservePerson) {
       $userCount = $reservePerson->users()->get()->count();
       $text = '<span style="margin-left: 10px;">' . $userCount . '</span>';
-      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">2部</a>' . $text . '</p>';}
+      $date = Carbon::parse('' . $date . '');
+      $weekDay = $date->format('D');
+      $weekDayClass = 'day-' . strtolower($weekDay);
+      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '"class="' . $weekDayClass . '">2部</a>' . $text . '</p>';}
     }
     if($three_part){
       $date = $this->carbon->format("Y-m-d");
@@ -65,7 +72,10 @@ class CalendarWeekDay{
       foreach ($reservePersons as $reservePerson) {
       $userCount = $reservePerson->users()->get()->count();
       $text = '<span style="margin-left: 10px;">' . $userCount . '</span>';
-      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '">3部</a>' . $text . '</p>';}
+      $date = Carbon::parse('' . $date . '');
+      $weekDay = $date->format('D');
+      $weekDayClass = 'day-' . strtolower($weekDay);
+      $html[] = '<p class="day_part m-0 pt-1"><a href="' . $url . '"class="' . $weekDayClass . '">3部</a>' . $text . '</p>';}
     }
     $html[] = '</div>';
 
@@ -110,5 +120,20 @@ class CalendarWeekDay{
     $html[] = '<p class="d-flex m-0 p-0">3部<input class="w-25" style="height:20px;" name="3" type="text" form="reserveSetting"></p>';
     $html[] = '</div>';
     return implode('', $html);
+  }
+
+    protected function getWeeks(){
+    $weeks = [];
+    $firstDay = $this->carbon->copy()->firstOfMonth();
+    $lastDay = $this->carbon->copy()->lastOfMonth();
+    $week = new CalendarWeek($firstDay->copy());
+    $weeks[] = $week;
+    $tmpDay = $firstDay->copy()->addDay(7)->startOfWeek();
+    while($tmpDay->lte($lastDay)){
+      $week = new CalendarWeek($tmpDay, count($weeks));
+      $weeks[] = $week;
+      $tmpDay->addDay(7);
+    }
+    return $weeks;
   }
 }

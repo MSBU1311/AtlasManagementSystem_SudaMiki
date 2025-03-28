@@ -26,8 +26,8 @@ class CalendarView{
     $html[] = '<th>水</th>';
     $html[] = '<th>木</th>';
     $html[] = '<th>金</th>';
-    $html[] = '<th>土</th>';
-    $html[] = '<th>日</th>';
+    $html[] = '<th class="day-sat">土</th>';
+    $html[] = '<th class="day-sun">日</th>';
     $html[] = '</tr>';
     $html[] = '</thead>';
     $html[] = '<tbody>';
@@ -43,7 +43,7 @@ class CalendarView{
         // 今日以前〜今日までの場合
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           // グレーアウトする
-          $html[] = '<td class="past-day border calendar-td">';
+          $html[] = '<td class="past-day border calendar-td '.$day->getClassName().'">';
         }else{
           $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }
@@ -55,15 +55,15 @@ class CalendarView{
           if(in_array($day->everyDay(), $day->authReserveDay())){
             $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
             if($reservePart == 1){
-              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">1部参加</p>';
+              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px; color: black;">1部参加</p>';
             }else if($reservePart == 2){
-              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">2部参加</p>';
+              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px; color: black;">2部参加</p>';
             }else if($reservePart == 3){
-              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">3部参加</p>';
+              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px; color: black;">3部参加</p>';
             }
           }else{
           // 受付終了を表示
-          $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+          $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px; color: black;">受付終了</p>';
           }
         // それ以外の場合
         }else{
@@ -96,10 +96,6 @@ class CalendarView{
             data-part="'. $reservePart .'"
             data-reserve-id="' . $day->authReserveDate($day->everyDay())->first()->id . '">
             '. $reservePart .'</button>';
-
-
-
-
           }
         }else{
           $html[] = $day->selectPart($day->everyDay());

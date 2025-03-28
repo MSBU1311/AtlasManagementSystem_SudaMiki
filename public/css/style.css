@@ -29,6 +29,10 @@ li {
   width: 150px;
 }
 
+.register {
+  margin: 70px;
+}
+
 .login_content,
 .register_content {
   background-color: #FFF;
@@ -87,7 +91,6 @@ li {
 /* サイドバー */
 .sidebar {
   width: 180px;
-  height: 100vh;
   background-color: #03AAD2;
   font-weight: bold;
   padding-top: 10px;
@@ -139,10 +142,6 @@ li {
 .day_part {
   color: #494949;
   font-size: 12px;
-}
-
-.adjust-table {
-  width: 70% !important;
 }
 
 .adjust-table td {
@@ -364,9 +363,12 @@ li {
   cursor: pointer;
 }
 
-.un_like,
 .un_like_btn {
   color: #E2254D;
+}
+
+.like_btn {
+  color: gray;
 }
 
 .error_message {

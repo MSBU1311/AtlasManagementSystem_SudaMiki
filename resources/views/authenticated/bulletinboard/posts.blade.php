@@ -1,6 +1,6 @@
 <x-sidebar>
 <div class="board_area w-100 border m-auto d-flex">
-  <div class="post_view w-75 mt-5">
+  <div class="post_view w-75 mt-5 mb-5">
     @foreach($posts as $post)
     <div class="post_area border w-75 m-auto p-3">
       <p><span>{{ $post->user->over_name }}</span><span class="ml-3">{{ $post->user->under_name }}</span>さん</p>
@@ -19,7 +19,7 @@
             <!-- likeモデルのlikeCountsメソッドを用いて、like_post_idカラムが今のpostのidと一致するレコードをカウントしている -->
             <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $like->likeCounts($post->id) }}</span></p>
             @else
-            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}" style="color: gray"></i><span class="like_counts{{ $post->id }}" style="color: gray">{{ $like->likeCounts($post->id) }}</span></p>
+            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}" style="color: gray"></i><span class="like_counts{{ $post->id }}">{{ $like->likeCounts($post->id) }}</span></p>
             @endif
           </div>
         </div>
