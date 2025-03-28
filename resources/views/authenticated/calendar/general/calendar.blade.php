@@ -30,7 +30,6 @@
         </div>
         <div class="w-50 m-auto edit-modal-btn d-flex">
           <a class="js-modal-close btn btn-primary d-block" href="">閉じる</a>
-          <!-- 受け取ったidを、コントローラーへ送信する -->
           <input type="hidden" name="reserve_id" id="delete-form-reserve-id">
           <input  type="submit" class="btn btn-danger d-inline-block" value="キャンセル">
         </div>

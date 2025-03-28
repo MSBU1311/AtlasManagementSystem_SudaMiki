@@ -87,15 +87,16 @@ class CalendarView{
             form="reserveParts">';
 
             // 対象の日付・部数・reserve_settingsのidをそれぞれ格納してJSに送る
+            // ?条件がtrueの時に実行、：条件がfalseの場合に実行
             $html[] = '<button
-            type="submit"
-            class="delete-modal-open btn btn-danger p-0 w-75"
-            name="delete_date"
-            style="font-size:12px"
-            data-date=" '. $day->everyDay() .'"
-            data-part="'. $reservePart .'"
-            data-reserve-id="' . $day->authReserveDate($day->everyDay())->first()->id . '">
-            '. $reservePart .'</button>';
+              type="submit"
+              class="delete-modal-open btn btn-danger p-0 w-75"
+              name="delete_date"
+              style="font-size:12px"
+              data-date=" '. $day->everyDay() .'"
+              data-part="'. $reservePart .'"
+              data-reserve-id="' . ($day->authReserve($day->everyDay()) ? $day->authReserve($day->everyDay())->id : null) . '">
+              '. $reservePart .'</button>';
           }
         }else{
           $html[] = $day->selectPart($day->everyDay());

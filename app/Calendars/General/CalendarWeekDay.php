@@ -74,6 +74,7 @@ class CalendarWeekDay{
      return '<input type="hidden" value="'. $this->carbon->format('Y-m-d') .'" name="getData[]" form="reserveParts">';
    }
 
+  //  特定の日付を取得
    function everyDay(){
      return $this->carbon->format('Y-m-d');
    }
@@ -86,6 +87,17 @@ class CalendarWeekDay{
   //  setting_reserve 列の値が $reserveDate と一致する要素のみ抽出する
    function authReserveDate($reserveDate){
      return Auth::user()->reserveSettings->where('setting_reserve', $reserveDate);
+   }
+
+  //  reserveSettingsモデルの中で、ログインユーザーのsetting_reserve カラムの値が $reserveDate と一致する要素とuser_id のカラムの値が ログインユーザーと一致する要素を抽出する
+  // $reserveDateは、$day->everyDay()のこと
+   function authReserve($reserveDate){
+     $reserveSetting =Auth::user()->reserveSettings()
+     ->where('setting_reserve', $reserveDate)
+     ->where('user_id',Auth::id())
+    ->first();
+    // dd($reserveSetting);
+      return $reserveSetting;
    }
 
    function getReserveSettingId($reserveDate) {
