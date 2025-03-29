@@ -465,7 +465,7 @@ li {
   flex-wrap: wrap;
   width: 70%;
   margin: 10px auto;
-  /* overflow: scroll; */
+  align-content: center;
   padding: 10px;
   border: none;
 }
