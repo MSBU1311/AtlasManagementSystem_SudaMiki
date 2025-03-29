@@ -8,6 +8,4 @@ $(function () {
     $('.subject_inner').slideToggle();
     $(this).find('.arrow_subject').toggleClass('up');
   });
-
-  $('[class^="subject_inner"]').hide();
 });
